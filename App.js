@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StatusBar } from 'react-native';
+import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/screens/Home';
+import Details from './src/screens/Details';
+import MyWebView from './src/screens/MyWebView';
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  let [fontsLoaded] = useFonts({
+    'Antonio-Medium': require('./assets/fonts/Antonio-Medium.ttf'),
+    'Spartan-Regular': require('./assets/fonts/Spartan-Regular.ttf'),
+    'Spartan-Bold': require('./assets/fonts/Spartan-Bold.ttf'),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="Details" component={Details} options={{ headerShown: false }} />
+          <Stack.Screen name="MyWebView" component={MyWebView} options={{ headerShown: false }} />
+
+        </Stack.Navigator>
+        <StatusBar barStyle="light-content" />
+      </NavigationContainer>
+    );
+  }
+}

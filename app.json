@@ -4,9 +4,9 @@
     "slug": "PlanetApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/img/planet-logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/img/splash-planet.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
